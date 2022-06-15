@@ -1,0 +1,28 @@
+node_modules
+npm-debug.log
+public/react-loadable.json
+webpack-assets.json
+build
+dev-build
+generated.ssrMiddleware.js
+dummyServer.js
+coverage
+
+# environment configuration
+.env
+
+# sonar-scanner properties
+.scannerwork
+sonar-project.properties
+
+# ignoring the jest snapshot branch pre_production
+__snapshots__/
+__tests__/
+
+# ignoring IDE settings
+.vscode
+
+# saved notes
+notes.txt
+
+.uploads
