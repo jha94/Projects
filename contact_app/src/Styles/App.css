@@ -1,0 +1,10 @@
+.App{
+    text-align: center;
+}
+
+.Button{
+    border-radius: 20px;
+    height: 50px;
+    width: 80px;
+    align-self: center;
+}
