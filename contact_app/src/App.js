@@ -4,16 +4,10 @@ function App() {
 const [name, setname] = useState('')
 const [nameList, setNameList] = useState([])
 const [editIndex, setEditIndex] = useState(-1);
-  return (
-    <div className='App'>
-    <h1>Contact Manager</h1>
-    <input
-    value={name}
-    placeholder='Name'
-    onChange={({target:{value}})=>{
-      setname(value)
-    }}
-    ></input>
+const [changedName, setChangedName] = useState('');
+
+const renderAddButton = () =>{
+  return(
     <button
     className='Button'
     onClick={()=>{
@@ -21,33 +15,80 @@ const [editIndex, setEditIndex] = useState(-1);
       setname('')
     }}
     >Add</button>
+  )
+}
+
+const renderDeleteButton = (val) =>{
+  return(
+    <button
+          className='Button'
+          onClick={()=>{
+      setNameList(nameList=>nameList.splice(nameList.indexOf(val), 1))
+     }}>
+      Delete
+      </button>
+  )
+}
+
+const renderSaveButton = (index) =>{
+  return(
+    <button
+          className='Button'
+          onClick={()=>{
+            setNameList(nameList=>nameList, nameList.splice(index, 1, changedName))
+            setEditIndex(-1)
+          }}
+          >Save</button>
+  )
+}
+
+const renderEditButton = (val, index) =>{
+  return(
+    <button
+     className='Button'
+     onClick={()=>{
+      setChangedName(val)
+      setEditIndex(index)
+     }}>Edit</button>
+  )
+
+}
+
+
+  return (
+    <div className='App'>
+    <h1>Contact Manager</h1>
+    <input
+    className='Input'
+    value={name}
+    placeholder='Add your contact'
+    onChange={({target:{value}})=>{
+      setname(value)
+    }}
+    ></input>
+  {renderAddButton()}
     {nameList && nameList.length?nameList.map((val, index)=>{
      return(
       <div>
         {
-          editIndex===index?<input
-          value={name}
+          editIndex===index?
+          <div>
+          <input
+          className='Input'
+          value={changedName}
           onChange={({target:{value}})=>{
-            setname(value)
+            setChangedName(value)
           }}
-          />:<p>{val}</p>
+          />
+          {renderSaveButton(index)}
+          </div>
+          :
+          <div>
+          <p className='AddedContact'>{val}</p>
+          {renderDeleteButton(val )}
+     {renderEditButton(val, index)}
+          </div>
         }
-     
-     {editIndex!==index?
-     <div>
-      <button onClick={()=>{
-      setNameList(nameList=>nameList.splice(nameList.indexOf(val), 1))
-     }}>Delete</button>
-     <button onClick={()=>{
-      setEditIndex(index)
-     }}>Edit</button>
-     </div>:
-     <button onClick={({target:{value}})=>{
-      setNameList(nameList[index]=name)
-      setEditIndex()
-     }} >Save</button>
-     }
-     
      </div>
      )
     }):''}
