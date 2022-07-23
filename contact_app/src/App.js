@@ -14,6 +14,7 @@ const renderAddButton = () =>{
       setNameList(nameList => [...nameList, name])
       setname('')
     }}
+    disabled={!name}
     >Add</button>
   )
 }
@@ -23,7 +24,7 @@ const renderDeleteButton = (val) =>{
     <button
           className='Button'
           onClick={()=>{
-      setNameList(nameList=>nameList.splice(nameList.indexOf(val), 1))
+      setNameList(nameList.filter(value=>value!==val))
      }}>
       Delete
       </button>
