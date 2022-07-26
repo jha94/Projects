@@ -1,23 +1,24 @@
-import React, {useState} from 'react';
-import './App.css'
-import useFetch from './useFetch';
-import Index1  from './Index1';
-import UserContext from './Context'
+import React, { useState } from 'react';
+import './Styles/App.css'
+import UseEffect from "./Components/UseEffect"
+import Person from './Components/Person';
 function App() {
   const [name, setName] = useState('Anil')
- const name2 = useFetch('https://randomuser.me/api/');
+  const [namefromAPI, setNamefromAPI] = useState('')
+  UseEffect('https://randomuser.me/api/', setNamefromAPI)
   return (
-    <UserContext.Provider value={'hiii'}>
     <div className='App'>
-    <h1>#1 Bullshit guy - {name}</h1>
-    <button onClick={()=>
-      setName(name==='Anil'?'Harkaran':'Anil')
-    }>Change bullshit guy</button>
-    <p>{name2 && name2.first}</p>
-    <p>{name2 && name2.last}</p>
-    <Index1/>
+    <h1>#1 bullshit guy {name}</h1>
+    <button onClick={()=>{
+      if(name==='Anil'){
+        setName('Harkaran')
+      } else{
+        setName('Anil')
+      }
+    }}>Chnage bullshit guy</button>
+    <h2>{namefromAPI}</h2>
+    <Person/>
     </div>
-    </UserContext.Provider>
   );
 }
 export default App;
