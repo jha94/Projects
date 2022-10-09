@@ -3,14 +3,20 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-color: brown;
+    background-color:rgba(47, 79, 79, 0.767)
 }
 
 #gyaan{
     border-radius: 5px;
 }
 #button{
-    height: 30px;
-    width: 100px;
+    height: 33px;
+    width: 80px;
+    border-radius: 5px;
+}
+
+#task{
+    height: 25px;
+    width: 200px;
     border-radius: 5px;
 }

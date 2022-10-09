@@ -1,9 +1,15 @@
-
-    let count = 0;
+let toDoS = []
     let button = document.getElementById('button');
-    console.log(document.getElementsByName('test'))
+    let xyz = document.getElementById('addedTodo');
     button.addEventListener('click', ()=>{
-        count++
-        alert(`button clicked ${count}`)
+        toDoS.push(document.getElementById('task').value);
+        toDoS.forEach((value, index)=>{
+            console.log('index', index)
+            let toDo = document.createElement('p');
+            toDo.innerText = value
+            xyz.appendChild(toDo)
+        })
+        document.getElementById('task').innerHTML=''
     })
-    document.getElementById('gyaan').innerHTML='hiiii'
+
+    
