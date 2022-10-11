@@ -11,6 +11,36 @@
     flex-direction: row;
 }
 
-#details{
-    
+.input{
+    height: 25px;
+    border-radius: 5px;
+    border-width: 0.5px;
+    width: 200px;
+    padding-left: 5px;
+    font-size: medium;
+}
+
+#name{
+    margin-left: 40px;
+}
+
+#author{
+    margin-left: 35px;
+}
+
+#desc{
+    margin-left: 5px;
+}
+
+#price{
+    margin-left: 47px;
+}
+
+#store{
+    margin-left: 120px;
+    height: 35px;
+    width: 130px;
+    border-radius: 5px;
+    border-width: 1px;
+    margin-bottom: 40px;
 }
