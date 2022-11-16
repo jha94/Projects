@@ -28,12 +28,8 @@ function setBooks(totalBooks, isAdd){
         return `<tr><td>${name}&nbsp;&nbsp;</td> <td>${author}&nbsp;&nbsp;</td>  <td>${desc}&nbsp;&nbsp;</td></del> <td>${price}&nbsp;&nbsp;</td> <td><button onclick='rentBook(${index})'>Rent</button></td> <td><button onclick='sellBook(${index})'>Sell</button></td></tr>`
         }
     })
-    if(totalBooks.length){
-        document.getElementById('bookStore').style.display='block';
-    } else{
-        document.getElementById('bookStore').style.display='none';
-    }
-
+    
+    document.getElementById('bookStore').style.display=(totalBooks.length?'block':'none')
     document.getElementById('addedBooks').innerHTML = result
     if(isAdd){
     document.getElementById('name').value='',
