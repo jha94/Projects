@@ -37,19 +37,21 @@ function App() {
   }, [])
 
   return (
-    <div className="App">
-    <LeftNav categoryList={categoryList}/>
-     <Header/>
-     {/* <BrowserRouter> */}
-        <Routes>
-          <Route path="/Business" element={<Business/>}/>
-          <Route path="/From our day to day life" element={<FromOurDayToDayLife/>} />
-          <Route path="/Science & Tech" element={<ScienecTech/>}/>
-          <Route path="/Sports" element={<Sports/>}/>
-       </Routes>
-       {/* </BrowserRouter> */}
-      <Footer/>
-    </div>
+    <div class="parent">
+  <div class="child"><Header/></div>
+  <div class="main">
+    <div class="child"><LeftNav categoryList={categoryList}/></div>
+    <div class="child content">
+         <Routes>
+           <Route path="/Business" element={<Business/>}/>
+           <Route path="/From our day to day life" element={<FromOurDayToDayLife/>} />
+           <Route path="/Science & Tech" element={<ScienecTech/>}/>
+           <Route path="/Sports" element={<Sports/>}/>
+        </Routes>
+      </div>  
+  </div>
+  <div class="child"><Footer/></div>
+</div>
   );
   
 }

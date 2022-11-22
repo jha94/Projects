@@ -18,7 +18,7 @@ export const LeftNav = ({categoryList=[]}) => {
   }
 
   return(
-    <div style={{backgroundColor:'#e67300', minHeight:'90vh', paddingTop:'70px', minWidth:'200px', marginLeft:'-00px' }}>
+    <div style={{ backgroundColor:'red', height:'70vh', backgroundColor:'#e67300', borderTopRightRadius:'10px', borderBottomRightRadius:'10px', paddingTop:'50px', minWidth:'300px', paddingLeft:'10px' }}>
       {getHeader()}
       {getLeftNavCategory()}
     </div>
