@@ -1,11 +1,20 @@
 import { useEffect, useState } from 'react';
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  Link
+} from "react-router-dom";
 import {db} from './firebase'
 import './App.css';
 import { collection , getDocs } from 'firebase/firestore';
-import { CategoryTile } from './Components/CategoryTile';
 import { Header } from './Components/Header';
 import { Footer } from './Components/Footer';
 import { LeftNav } from './Components/LeftNav';
+import { Business } from './Components/Business';
+import { FromOurDayToDayLife } from './Components/FromOurDayToDayLife';
+import { ScienecTech } from './Components/Scienec&Tech'
+import {Sports} from './Components/Sports';
 
 function App() {
 
@@ -30,8 +39,16 @@ function App() {
   return (
     <div className="App">
     <LeftNav categoryList={categoryList}/>
-    <Header/>
-    <Footer/>
+     <Header/>
+     {/* <BrowserRouter> */}
+        <Routes>
+          <Route path="/Business" element={<Business/>}/>
+          <Route path="/From our day to day life" element={<FromOurDayToDayLife/>} />
+          <Route path="/Science & Tech" element={<ScienecTech/>}/>
+          <Route path="/Sports" element={<Sports/>}/>
+       </Routes>
+       {/* </BrowserRouter> */}
+      <Footer/>
     </div>
   );
   
