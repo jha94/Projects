@@ -8,13 +8,13 @@ export const LeftNav = ({categoryList=[]}) => {
   }
 
   const getLeftNavCategory = () =>{
-    return categoryList.length && categoryList.map(value=>{
+    return categoryList.length? categoryList.map(value=>{
       return(
         <Link to={Object.keys(value)[0]}>
         <p style={{color:'#fff'}}>{Object.keys(value)[0]}</p>
         </Link>
       )
-    })
+    }):''
   }
 
   return(

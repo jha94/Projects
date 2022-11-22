@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 import {
-  BrowserRouter,
   Route,
   Routes,
-  Link
 } from "react-router-dom";
 import {db} from './firebase'
 import './App.css';
@@ -15,15 +13,16 @@ import { Business } from './Components/Business';
 import { FromOurDayToDayLife } from './Components/FromOurDayToDayLife';
 import { ScienecTech } from './Components/Scienec&Tech'
 import {Sports} from './Components/Sports';
+import {Main} from './Components/Main';
+import {MainStory} from './Components/MainStory';
 
 function App() {
 
   const [categoryList, setCategoryList] = useState([])
-  const [loading,setLoading] = useState(false);
   
   useEffect(()=>{
     const categories = []
-    setLoading(true)
+    
     getDocs(collection(db, "/thrive")).then(value=>{
       value.forEach(item=>{
         categories.push({
@@ -33,9 +32,8 @@ function App() {
       }
         )
     })
-    setLoading(false)
+    
   }, [])
-
   return (
     <div class="parent">
   <div class="child"><Header/></div>
@@ -43,10 +41,12 @@ function App() {
     <div class="child"><LeftNav categoryList={categoryList}/></div>
     <div class="child content">
          <Routes>
-           <Route path="/Business" element={<Business/>}/>
-           <Route path="/From our day to day life" element={<FromOurDayToDayLife/>} />
-           <Route path="/Science & Tech" element={<ScienecTech/>}/>
-           <Route path="/Sports" element={<Sports/>}/>
+         <Route path="/" element={<Main totalStories = {categoryList}/>}/>
+         <Route path="/story" element={<MainStory />}/>
+           <Route path="/Business" element={<Business businessStories = {categoryList &&categoryList.length && Object.values(categoryList[0])}/>}/>
+           <Route path="/From our day to day life" element={<FromOurDayToDayLife dailyStories={categoryList[1]}/>} />
+           <Route path="/Science & Tech" element={<ScienecTech scienceStories={categoryList[2]}/>}/>
+           <Route path="/Sports" element={<Sports sportsStories={categoryList[3]}/>}/>
         </Routes>
       </div>  
   </div>
