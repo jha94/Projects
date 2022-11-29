@@ -6,6 +6,7 @@ export const Business = ({businessStories=[]}) => {
   return (
     <div style={{ display:'flex', flexDirection:'row', justifyContent:'center', alignItems:'center' }}>
         {total.length && total.map(value=>{
+          console.log('value', value);
             return (
                 <StoryTile title={value.title} image={value.image} story={value.story}/>
             )

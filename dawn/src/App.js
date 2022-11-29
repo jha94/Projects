@@ -17,12 +17,9 @@ import {Main} from './Components/Main';
 import {MainStory} from './Components/MainStory';
 
 function App() {
-
   const [categoryList, setCategoryList] = useState([])
-  
   useEffect(()=>{
     const categories = []
-    
     getDocs(collection(db, "/thrive")).then(value=>{
       value.forEach(item=>{
         categories.push({
@@ -32,7 +29,6 @@ function App() {
       }
         )
     })
-    
   }, [])
   return (
     <div class="parent">

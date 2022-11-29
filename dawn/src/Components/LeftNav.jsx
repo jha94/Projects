@@ -4,7 +4,11 @@ import {
 } from "react-router-dom";
 export const LeftNav = ({categoryList=[]}) => {
   const getHeader = () =>{
-    return <p style={{ fontWeight:'bold', fontSize:'30px', marginTop:'-3px', color:'#fff' }}>DAWN</p>
+    return (
+    <Link to={'/'}>
+    <p style={{ fontWeight:'bold', fontSize:'30px', marginTop:'-3px', color:'#fff' }}>DAWN</p>
+    </Link>
+    )
   }
 
   const getLeftNavCategory = () =>{
