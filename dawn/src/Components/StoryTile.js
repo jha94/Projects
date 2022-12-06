@@ -1,8 +1,9 @@
 import React from 'react'
 import {Link} from "react-router-dom";
-export const StoryTile = ({title, image, story}) => {
+export const StoryTile = ({title, image, story, path}) => {
+  console.log('in story')
   return (
-    <Link to="/story" state={{title:title, image:image, story:story}}>
+    <Link to={'/'+(path||"story")} state={{title:title, image:image, story:story}}>
     <button
     style={{
       backgroundColor:'#ff884d',

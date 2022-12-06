@@ -1,7 +1,13 @@
 import React from 'react'
-
-export const ScienecTech = () => {
+import { StoryTile } from './StoryTile';
+import {getCatWiseData} from './utils'
+export const ScienecTech = ({scienceStories}) => {
+  let total = getCatWiseData(scienceStories)
   return (
-    <div>Scienec&Tech</div>
+    <div style={{ display:'flex', flexDirection:'row', justifyContent:'center', alignItems:'center' }}>
+        {total.length && total.map(value=>
+                <StoryTile title={value.title} image={value.image} story={value.story}/>
+            )}
+    </div>
   )
 }

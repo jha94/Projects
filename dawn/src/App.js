@@ -40,9 +40,9 @@ function App() {
          <Route path="/" element={<Main totalStories = {categoryList}/>}/>
          <Route path="/story" element={<MainStory />}/>
            <Route path="/Business" element={<Business businessStories = {categoryList &&categoryList.length && Object.values(categoryList[0])}/>}/>
-           <Route path="/From our day to day life" element={<FromOurDayToDayLife dailyStories={categoryList[1]}/>} />
-           <Route path="/Science & Tech" element={<ScienecTech scienceStories={categoryList[2]}/>}/>
-           <Route path="/Sports" element={<Sports sportsStories={categoryList[3]}/>}/>
+           <Route path="/From our day to day life" element={<FromOurDayToDayLife dailyStories={categoryList &&categoryList.length && Object.values(categoryList[1])}/>} />
+           <Route path="/Science & Tech" element={<ScienecTech scienceStories={categoryList &&categoryList.length && Object.values(categoryList[2])}/>}/>
+           <Route path="/Sports" element={<Sports sportsStories={categoryList &&categoryList.length && Object.values(categoryList[3])}/>}/>
         </Routes>
       </div>  
   </div>

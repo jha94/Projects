@@ -5,7 +5,6 @@ import userEvent from '@testing-library/user-event'
 
 test('Comment gets displyed after submitting', ()=>{
     render(<App/>)
-
     const checkbox = screen.getByLabelText('I agree with terms and conditions', {exact:false})
     const submitButton = screen.getByRole('button', {name:'Comment', exact:false});
     const commentInput = screen.getByPlaceholderText('write your comment', {exact:false});
@@ -13,7 +12,6 @@ test('Comment gets displyed after submitting', ()=>{
     userEvent.type(commentInput, 'something')
     userEvent.click(checkbox)
     userEvent.click(submitButton)
-
     userEvent.type(commentInput, 'awesome')
     // userEvent.click(checkbox)
     userEvent.click(submitButton)
@@ -22,6 +20,4 @@ test('Comment gets displyed after submitting', ()=>{
 const commentLi = screen.getAllByRole('listitem')
 //    expect(commentLi).toBeInTheDocument();
 expect(commentLi.length).toBe(2)
-
-
 })
