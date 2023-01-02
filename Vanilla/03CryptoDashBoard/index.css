@@ -1,0 +1,28 @@
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.card{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    background-color: rgb(240, 238, 235);
+    height: 150px;
+    width: 50%;
+    border-radius: 30px;
+    margin-bottom: 20px;
+}
+
+.image{
+    height: 100px;
+    width: 100px;
+    margin-left: 20px;
+}
+
+.price{
+    margin-right: 30px;
+}
