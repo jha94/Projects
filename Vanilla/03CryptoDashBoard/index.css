@@ -26,3 +26,9 @@
 .price{
     margin-right: 30px;
 }
+
+.header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
