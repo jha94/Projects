@@ -7,7 +7,8 @@ const ProgramDetailsProvider = (props) => {
         // this state will be shared with all components 
     const [programDetails, setProgramDetails] = useState({
         showProgramList:true,
-    programList: []
+    programList: [],
+    index: -1,
     });
 
     return (

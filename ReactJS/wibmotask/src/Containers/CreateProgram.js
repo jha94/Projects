@@ -4,8 +4,10 @@ import { programDetailsContext, allLetter } from '../Utils'
 
 export default function CreateProgram() {
   const [programDetails, setProgramDetails] = useContext(programDetailsContext);
+  const { programList: createdProgram, index: createProgramIndex } =  programDetails;
+  console.log('createProgramIndex', createProgramIndex);
   const [programData, setProgramData] = useState({
-    programName:'',
+    programName:((createdProgram.length && createProgramIndex>-1)&& createdProgram[createProgramIndex].programName)||'',
     client:'',
     duration:'',
     country:'',
@@ -20,7 +22,7 @@ export default function CreateProgram() {
     }
   })
     const handleSubmit = (event) => {
-      const { programList } =  programDetails;
+      const { programList, index } =  programDetails;
       const { programName, selectedKYC, uID, duration, country } = programData;
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -38,11 +40,14 @@ export default function CreateProgram() {
             uID: !uID?false:uID,
             otherIdDetails:otherIdDetails,
          }));
-        programList.push(programData)
+         console.log('index', index);
+         index>-1?programList[index]=programData:programList.push(programData)
+        
         setProgramDetails({
           // showProgramList:(programName && client && duration && country && selectedKYC && fullKYCReqDocs && uID && otherIdDetails),
           programList,
-          showProgramList: true
+          showProgramList: true,
+          index:-1
         })
       };
       const {programName , selectedKYC, uID, client, duration, country, minKYCType, fullKYCReqDocs, otherIdDetails} = programData
@@ -69,18 +74,17 @@ export default function CreateProgram() {
           minKYCType:value
        }));
       };
-
-      console.log('minKYCType', minKYCType);
+      const { programList, index } =  programDetails;
   return (
     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
     <div style={{marginLeft:'50px'}} >
     
       <div>
       Program Name:  <TextField
-      required
           variant="standard"
           name='name'
           type='text'
+          value={programName}
           onChange={({target:{value}})=>{
                 setProgramData(prevState => ({
                   ...prevState,

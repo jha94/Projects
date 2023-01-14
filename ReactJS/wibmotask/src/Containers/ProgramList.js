@@ -20,6 +20,13 @@ function ProgramList(){
                     programList:programList
                  }));
                 }} >Delete</button>
+                <button onClick={()=>{
+                  setProgramDetails(prevState => ({
+                    ...prevState,
+                    showProgramList:false,
+                    index:index
+                 }));
+                }} >Edit</button>
             </div>
         )
       })
