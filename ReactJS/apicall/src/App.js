@@ -3,7 +3,6 @@ import './App.css';
 
 function App() {
   const [posts, setPosts] = useState([]);
-  const [id, setId] = useState();
 
   useEffect(()=>{
     fetch(`https://jsonplaceholder.typicode.com/posts/`+ new URLSearchParams({
