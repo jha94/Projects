@@ -25,6 +25,23 @@ const validationData = Object.freeze({
     wrongPasswordWarningMsg: 'Please enter valid password',
 })
 
+const programCreationData = Object.freeze({
+  clientList: [
+    {name:'Gemini Financial Pvt. Ltd.', code:'gemini fin'},
+    {name:'Yes Bank', code:'yes bank'},
+    {name:'HDFC Bank', code:'HDFC'},
+  ],
+  countryList: [
+    {name:'India', code:'+91'},
+    {name:'USA', code:'+1'},
+    {name:'France', code:'+33'}
+  ],
+  supportedKYCList: ['Full KYC', 'Min KYC','Short Fall KYC'],
+  minimumKYCOptions:[ 'Cash Load', 'No Cash Load', 'Not Applicable'],
+  fullKYCSupportedDocs: [ 'Aadhar Card', 'Pan Card', 'Voter ID'],
+  uniqueidentifiers: ['Pan Card', 'Mobile Number', 'Email ID', 'Others']
+})
+
 function allLetter(inputtxt)
   {
    var letters = /^[A-Za-z]+$/;
@@ -40,5 +57,5 @@ function allLetter(inputtxt)
   }
   
 
-export { programDetailsContext, ProgramDetailsProvider, validationData, allLetter }
+export { programDetailsContext, ProgramDetailsProvider, validationData, allLetter, programCreationData }
 

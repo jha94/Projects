@@ -1,11 +1,10 @@
 import React, {useContext, useState} from 'react';
 import {TextField, Button, Box, Select, MenuItem,FormControlLabel, Checkbox, FormHelperText, FormControl } from '@mui/material';
-import { programDetailsContext, allLetter } from '../Utils'
+import { programDetailsContext, programCreationData } from '../Utils'
 
 export default function CreateProgram() {
   const [programDetails, setProgramDetails] = useContext(programDetailsContext);
   const { programList: createdProgram, index: createProgramIndex } =  programDetails;
-  console.log('createProgramIndex', createProgramIndex);
   const [programData, setProgramData] = useState({
     programName:((createdProgram.length && createProgramIndex>-1)&& createdProgram[createProgramIndex].programName)||'',
     client:'',
@@ -23,34 +22,28 @@ export default function CreateProgram() {
   })
     const handleSubmit = (event) => {
       const { programList, index } =  programDetails;
-      const { programName, selectedKYC, uID, duration, country } = programData;
+      const { selectedKYC } = programData;
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        otherIdDetails.name=!otherIdDetails.name?false:otherIdDetails.name
-        otherIdDetails.type=!otherIdDetails.type?false:otherIdDetails.type
-        otherIdDetails.length=!otherIdDetails.length?false:otherIdDetails.length
           setProgramData(prevState => ({
             ...prevState,
-            programName:!programName?false:programName,
-            client:!client? false:client,
-            duration:!duration?false:duration,
-            country:!country?false:country,
             selectedKYC: !selectedKYC.length?['false']:selectedKYC,
-            fullKYCReqDocs: !fullKYCReqDocs?false:fullKYCReqDocs,
-            uID: !uID?false:uID,
-            otherIdDetails:otherIdDetails,
+            minKYCType:(selectedKYC.includes('Min KYC') && !minKYCType)?'false':minKYCType,
          }));
-         console.log('index', index);
+
+         console.log('minKYCType', minKYCType);
+
          index>-1?programList[index]=programData:programList.push(programData)
-        
-        setProgramDetails({
-          // showProgramList:(programName && client && duration && country && selectedKYC && fullKYCReqDocs && uID && otherIdDetails),
-          programList,
-          showProgramList: true,
-          index:-1
-        })
+         console.log('selectedKYC.includes(',  (selectedKYC.includes('Min KYC') && minKYCType));
+      //   if((selectedKYC.length && !selectedKYC.includes('false'))){
+      //     console.log('text in if');
+      //   setProgramDetails({
+      //     programList,
+      //     showProgramList: true,
+      //     index:-1
+      //   })
+      // }
       };
-      const {programName , selectedKYC, uID, client, duration, country, minKYCType, fullKYCReqDocs, otherIdDetails} = programData
+      const {programName , selectedKYC, uID, minKYCType, otherIdDetails} = programData
       const handleKYCCheck = (event) => {
         var selectedKYC = [...programData.selectedKYC];
         if (event.target.checked) {
@@ -71,17 +64,17 @@ export default function CreateProgram() {
       const handleMinKYCType = ({target:{value}}) => {
         setProgramData(prevState => ({
           ...prevState,
-          minKYCType:value
+          minKYCType:minKYCType!==value?value:''
        }));
       };
-      const { programList, index } =  programDetails;
+      const { clientList, countryList, supportedKYCList, minimumKYCOptions, fullKYCSupportedDocs, uniqueidentifiers } = programCreationData;
   return (
-    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+    <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
     <div style={{marginLeft:'50px'}} >
-    
       <div>
       Program Name:  <TextField
           variant="standard"
+          required
           name='name'
           type='text'
           value={programName}
@@ -91,8 +84,6 @@ export default function CreateProgram() {
                   programName:value
                }));
               }}
-          error={programName===false}
-          helperText={programName===false?'This field is mandatory':''}
         />
       </div>
       <br/>
@@ -101,9 +92,9 @@ export default function CreateProgram() {
           contentEditable={false}
           value='Gem bank, India'
         />
-      Client: 
-      <FormControl sx={{ m: 1, minWidth: 120 }} error={client===false}>
+      Client:
       <Select
+      required
           size='small'
           style={{minWidth:'150px', minHeight:'10px'}}
           onChange={({target:{value}})=>{
@@ -113,19 +104,14 @@ export default function CreateProgram() {
            }));
           }}
         >
-          <MenuItem value={'gemini fin'}>Gemini Financial Pvt. Ltd.</MenuItem>
-          <MenuItem value={'yes bank'}>Yes Bank</MenuItem>
-          <MenuItem value={'HDFC'}>HDFC bank</MenuItem>
-          
+          {clientList.map(({name, code})=><MenuItem value={code}>{name}</MenuItem>)}
         </Select>
-        {client===false?<FormHelperText>This Field is mandatory</FormHelperText>:''}
-        </FormControl>
-       
         <br/>
         <br/>
         
 
         Program Duration:  <TextField
+        required
           variant="standard"
           name='duration'
           InputProps={{
@@ -138,12 +124,10 @@ export default function CreateProgram() {
               duration:value
            }));
           }}
-          error={duration===false}
-          helperText={duration===false?'This field is mandatory':''}
         />
       Country:
-      <FormControl sx={{ m: 1, minWidth: 120 }} error={country===false}>
       <Select
+      required
           size='small'
           style={{minWidth:'150px', minHeight:'10px'}}
           onChange={({target:{value}})=>{
@@ -152,61 +136,54 @@ export default function CreateProgram() {
               country:value
            }));
           }}
-          helperText={country===false?'This field is mandatory':''}
+         
         >
-          <MenuItem value={'+91'}>India</MenuItem>
-          <MenuItem value={'+1'}>USA</MenuItem>
-          <MenuItem value={'+33'}>France</MenuItem>
+          {countryList.map(({name, code})=><MenuItem value={code}>{name}</MenuItem>)}
         </Select>
-        {country===false?<FormHelperText>This Field is mandatory</FormHelperText>:''}
-        </FormControl>
    
     <br/>
 
    
    <FormControl sx={{ m: 1, minWidth: 120 }} style={{ display:'flex', flexDirection:'row' }} error={selectedKYC.includes('false')}>
    Support KYC:
-   <FormControlLabel control={<Checkbox onChange={handleKYCCheck} value="Full KYC" />} label="Full KYC" />
-   <FormControlLabel control={<Checkbox onChange={handleKYCCheck} value="Min KYC" />} label="Min KYC" />
-   <FormControlLabel control={<Checkbox onChange={handleKYCCheck} value="Short Fall KYC" />} label="Short Fall KYC" />
+   {supportedKYCList.map((value)=><FormControlLabel control={<Checkbox onChange={handleKYCCheck} value={value} />} label={value} />)}
    {selectedKYC.includes('false')?<FormHelperText>This Field is mandatory</FormHelperText>:''}
    </FormControl>
         
         <br/>
         {(selectedKYC.length&&selectedKYC.includes('Min KYC'))?
-           <FormControl sx={{ m: 1, minWidth: 120 }} style={{ display:'flex', flexDirection:'row' }} error={!minKYCType}>
-   <FormControlLabel control={<Checkbox checked={minKYCType==='Cash Load'} onChange={handleMinKYCType} value="Cash Load" />} label="Cash Load" />
-   <FormControlLabel control={<Checkbox checked={minKYCType==='No Cash Load'} onChange={handleMinKYCType} value="No Cash Load" />} label="No Cash Load" />
-   <FormControlLabel control={<Checkbox checked={minKYCType==='Not Applicable'} onChange={handleMinKYCType} value="Not Applicable" />} label="Not Applicable" />
-   {!minKYCType?<FormHelperText>This Field is mandatory</FormHelperText>:''}
+           <FormControl sx={{ m: 1, minWidth: 120 }} style={{ display:'flex', flexDirection:'row' }} error={minKYCType==='false'}>
+            {minimumKYCOptions.map((value)=>
+   <FormControlLabel control={<Checkbox checked={minKYCType===value} onChange={handleMinKYCType} value={value} />} label={value} />
+            )}
+   {minKYCType==='false'?<FormHelperText>This Field is mandatory</FormHelperText>:''}
 
    </FormControl>
         :''}
         {(selectedKYC.length&&((selectedKYC.includes('Full KYC'))||selectedKYC.includes('Short Fall KYC')))?
-           <FormControl sx={{ m: 1, minWidth: 120 }} style={{ display:'flex', flexDirection:'row' }} error={!minKYCType}>
+           <FormControl sx={{ m: 1, minWidth: 120 }} style={{ display:'flex', flexDirection:'row' }}>
           Documents Supported :
          <Select
+         required
          onChange={({target:{value}})=>{
           setProgramData(prevState => ({
             ...prevState,
             fullKYCReqDocs:value
          }));
          }}
-        error={selectedKYC.includes('Full KYC') && fullKYCReqDocs===false}
         size='small'
         style={{minWidth:'150px', minHeight:'10px'}}
       >
-        <MenuItem value={'Aadhar Card'}>Aadhar Card</MenuItem>
-        <MenuItem value={'Pan Card'}>Pan Card</MenuItem>
-        <MenuItem value={'Voter ID'}>Voter ID</MenuItem>
+        {fullKYCSupportedDocs.map((value)=><MenuItem value={value}>{value}</MenuItem>)}
       </Select>
-   {selectedKYC.includes('Full KYC') && fullKYCReqDocs===false?<FormHelperText>This Field is mandatory</FormHelperText>:''}
+   
 
       </FormControl>
         :''}
-           <FormControl sx={{ m: 1, minWidth: 120 }} style={{ display:'flex', flexDirection:'row' }} error={uID===false}>
+           <FormControl sx={{ m: 1, minWidth: 120 }} style={{ display:'flex', flexDirection:'row' }}>
 Unique identifier :
          <Select
+         required
         size='small'
         style={{minWidth:'150px', minHeight:'10px'}}
         onChange={(event)=>{
@@ -216,13 +193,8 @@ Unique identifier :
          }));
         }}
       >
-        
-        <MenuItem value={'Pan Card'}>Pan Card</MenuItem>
-        <MenuItem value={'Mobile Number'}>Mobile Number</MenuItem>
-        <MenuItem value={'Email ID'}>Email ID</MenuItem>
-        <MenuItem value={'Others'}>Others</MenuItem>
+        {uniqueidentifiers.map((value)=> <MenuItem value={value}>{value}</MenuItem>)}
       </Select>
-   {uID===false?<FormHelperText>This Field is mandatory</FormHelperText>:''}
 
       </FormControl>
       {uID==='Others'?
@@ -230,6 +202,7 @@ Unique identifier :
         Define Others
 <br/>
         ID Name:  <TextField
+        required
           variant="standard"
           type='text'
           onChange={({target:{value}})=>{
@@ -239,12 +212,11 @@ Unique identifier :
                   otherIdDetails
                }));
               }}
-              error={uID && otherIdDetails.name===false}
-              helperText={uID && otherIdDetails.name===false?'This field is mandatory':''}
         />
         <br />
 
 ID Type:  <TextField
+required
           variant="standard"
           type='text'
           onChange={({target:{value}})=>{
@@ -254,8 +226,6 @@ ID Type:  <TextField
                   otherIdDetails,
                }));
               }}
-              error={uID && otherIdDetails.type===false}
-              helperText={uID && otherIdDetails.type===false?'This field is mandatory':''}
         />
 <br/>
 ID Length:  <TextField
@@ -269,8 +239,6 @@ required
                   otherIdDetails,
                }));
               }}
-          error={uID && otherIdDetails.length===false}
-          helperText={uID && otherIdDetails.length===false?'This field is mandatory':''}
         />
       </div>
 
