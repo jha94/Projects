@@ -85,7 +85,6 @@ export default function CreateProgram() {
       <TextField
       variant="standard"
       required
-      name='name'
       type='text'
       value={programName}
       onChange={({target:{value}})=>{
@@ -117,7 +116,7 @@ export default function CreateProgram() {
            }));
           }}
         >
-          {clientList.map(({name, code})=><MenuItem value={code}>{name}</MenuItem>)}
+          {clientList.map((value)=><MenuItem value={value}>{value.name}</MenuItem>)}
         </Select>
         <br/>
         <br/>
@@ -150,9 +149,8 @@ export default function CreateProgram() {
               country:value
            }));
           }}
-         
         >
-          {countryList.map(({name, code})=><MenuItem value={code}>{name}</MenuItem>)}
+          {countryList.map((value)=><MenuItem value={value}>{value.name}</MenuItem>)}
         </Select>
         <br/>
         </div>

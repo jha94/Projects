@@ -1,6 +1,5 @@
 import React, {useContext, useState} from 'react'
 import Button from '@mui/material/Button';
-import '../App.css'
 import { programDetailsContext } from '../Utils'
 
 function ProgramList(){
@@ -9,18 +8,27 @@ function ProgramList(){
     const { programList } =  programDetails;
     const renderprograms = () => {
       return  programList.length?
-      programList.map(({programName}, index)=>{
+      programList.map(({programName, country:{name:countryName}, duration, fullKYCReqDocs, client, otherIdDetails, uID }, index)=>{
+        console.log('Object.keys(otherIdDetails)', Object.values(otherIdDetails));
         return(
-            <div style={{ display:'flex', flexDirection:alignmentType }}>
-                <p>{programName}</p>
-                <button onClick={()=>{
+            <div style={{ display:'flex', flexDirection:alignmentType, paddingLeft:'15px', justifyContent:'space-evenly' }}>
+                <p>Program: {programName}</p>
+                <p>Country: {countryName}</p>
+                <p>Duration(In Month): {duration}</p>
+                <p>KYC Doc : {fullKYCReqDocs}</p>
+                <p>Client : {client.name}</p>
+               
+                 {otherIdDetails.name? <p>Other ID Name: {otherIdDetails.name}</p>:''}
+                 {otherIdDetails.type?<p>Other ID Type: {otherIdDetails.type}</p>:''}
+                 <p>Unique Identifier: {uID}</p>
+                <button style={{width:'80px', height:'35px', marginTop:'6px'}} onClick={()=>{
                   programList.splice(index, 1)
                   setProgramDetails(prevState => ({
                     ...prevState,
                     programList:programList
                  }));
                 }} >Delete</button>
-                <button onClick={()=>{
+                <button style={{width:'80px', height:'35px', marginTop:'6px'}} onClick={()=>{
                   setProgramDetails(prevState => ({
                     ...prevState,
                     showProgramList:false,
