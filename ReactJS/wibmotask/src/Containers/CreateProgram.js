@@ -119,7 +119,7 @@ export default function CreateProgram() {
               type="text"
               value={programName}
               onChange={({ target: { value } }) => {
-                if (allLetter(value)) {
+                if (allLetter(value||programName)) {
                   setProgramData((prevState) => ({
                     ...prevState,
                     programName: value,
@@ -309,7 +309,7 @@ export default function CreateProgram() {
               type="text"
               value={otherIdDetails.name}
               onChange={({ target: { value } }) => {
-                if (allLetter(value)) {
+                if (allLetter(value || otherIdDetails.name)) {
                   otherIdDetails.name = value;
                   setProgramData((prevState) => ({
                     ...prevState,
@@ -330,7 +330,7 @@ export default function CreateProgram() {
               value={otherIdDetails.type}
               type="text"
               onChange={({ target: { value } }) => {
-                if (alphaNumeric(value)) {
+                if (alphaNumeric(value || otherIdDetails.type)) {
                   otherIdDetails.type = value;
                   otherIdDetails.length = value.length;
                   setProgramData((prevState) => ({
@@ -350,6 +350,7 @@ export default function CreateProgram() {
               required
               variant="standard"
               InputProps={{
+                readOnly:true,
                 inputProps: { min: 1 },
               }}
               type="number"
