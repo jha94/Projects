@@ -42,20 +42,30 @@ const programCreationData = Object.freeze({
   uniqueidentifiers: ['Pan Card', 'Mobile Number', 'Email ID', 'Others']
 })
 
-function allLetter(inputtxt)
+const alphaNumeric = (value)=> {
+  const alphaNumeric = /^[0-9a-zA-Z]+$/;
+    if (value.match(alphaNumeric)) {
+      return true;
+    } else{
+    alert("Oops!! Please don't enter special characters.");
+     return false;
+    }
+};
+
+function allLetter(inputtext)
   {
    var letters = /^[A-Za-z]+$/;
-   if(inputtxt.match(letters))
+   if(inputtext.match(letters))
      {
       return true;
      }
    else
      {
-     alert("message");
+     alert("Oops!! Please enter only alphabets.");
      return false;
      }
   }
   
 
-export { programDetailsContext, ProgramDetailsProvider, validationData, allLetter, programCreationData }
+export { programDetailsContext, ProgramDetailsProvider, validationData, allLetter, programCreationData, alphaNumeric }
 

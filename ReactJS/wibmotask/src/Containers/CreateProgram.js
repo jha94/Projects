@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react';
 import {TextField, Button, Box, Select, MenuItem,FormControlLabel, Checkbox, FormHelperText, FormControl } from '@mui/material';
-import { programDetailsContext, programCreationData } from '../Utils'
+import { programDetailsContext, programCreationData, allLetter, alphaNumeric } from '../Utils'
 
 export default function CreateProgram() {
   const [programDetails, setProgramDetails] = useContext(programDetailsContext);
@@ -84,10 +84,12 @@ export default function CreateProgram() {
           type='text'
           value={programName}
           onChange={({target:{value}})=>{
-                setProgramData(prevState => ({
-                  ...prevState,
-                  programName:value
-               }));
+            if(allLetter(value)){
+              setProgramData(prevState => ({
+                ...prevState,
+                programName:value
+             }));
+            }
               }}
         />
       </div>
@@ -210,40 +212,44 @@ Unique identifier :
         required
           variant="standard"
           type='text'
+          value={otherIdDetails.name}
           onChange={({target:{value}})=>{
+            if(allLetter(value)){
             otherIdDetails.name=value
                 setProgramData(prevState => ({
                   ...prevState,
                   otherIdDetails
                }));
+              }
               }}
         />
         <br />
 
 ID Type:  <TextField
-required
           variant="standard"
+          required
+          value={otherIdDetails.type}
           type='text'
           onChange={({target:{value}})=>{
+            if(alphaNumeric(value)){
             otherIdDetails.type=value
+            otherIdDetails.length=value.length;
                 setProgramData(prevState => ({
                   ...prevState,
                   otherIdDetails,
                }));
               }}
+            }
         />
 <br/>
 ID Length:  <TextField
 required
           variant="standard"
-          type='text'
-          onChange={({target:{value}})=>{
-            otherIdDetails.length=value
-                setProgramData(prevState => ({
-                  ...prevState,
-                  otherIdDetails,
-               }));
-              }}
+          InputProps={{
+            inputProps: { min: 1 }
+          }}
+          type='number'
+          value={otherIdDetails.length}
         />
       </div>
 
