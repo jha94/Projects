@@ -6,6 +6,7 @@ import {
   allLetter,
   alphaNumeric,
 } from "../Utils";
+import './CreateProgram.css'
 
 export default function CreateProgram() {
   const [programDetails, setProgramDetails] = useContext(programDetailsContext);
@@ -145,7 +146,7 @@ export default function CreateProgram() {
               size="small"
               value={client}
               defaultValue={client}
-              style={{ minWidth: "150px", minHeight: "10px" }}
+              className='Select'
               onChange={({ target: { value } }) => {
                 setProgramData((prevState) => ({
                   ...prevState,
@@ -186,7 +187,7 @@ export default function CreateProgram() {
               readOnly={createProgramIndex>-1}
               size="small"
               value={country}
-              style={{ minWidth: "150px", minHeight: "10px" }}
+              className='Select'
               onChange={({ target: { value } }) => {
                 setProgramData((prevState) => ({
                   ...prevState,
@@ -212,7 +213,7 @@ export default function CreateProgram() {
           {supportedKYCList.map((value) => (
             <Grid xs={3}>
               <FormControl
-                style={{ display: "flex", flexDirection: "row" }}
+               className='FormControl'
                 error={selectedKYC.includes("false")}
               >
                 <FormControlLabel
@@ -246,7 +247,7 @@ export default function CreateProgram() {
                         }));
                       }}
                       size="small"
-                      style={{ minWidth: "150px", minHeight: "10px" }}
+                      className="Select"
                     >
                       {fullKYCSupportedDocs.map((value) => (
                         <MenuItem value={value}>{value}</MenuItem>
@@ -262,7 +263,7 @@ export default function CreateProgram() {
           <Grid xs={7}>
             {selectedKYC.length && selectedKYC.includes("Min KYC") ? (
               <FormControl
-                style={{ display: "flex", flexDirection: "row" }}
+              className='FormControl'
                 error={typeof minKYCType === "boolean"}
               >
                 {minimumKYCOptions.map((value) => (
@@ -369,13 +370,13 @@ export default function CreateProgram() {
       {fullKYCReqDocs?<Grid xs={4}>
           <FormControl
             sx={{ minWidth: 120 }}
-            style={{ display: "flex", flexDirection: "row" }}
+            className='FormControl'
           >
             <Select
               value={uID}
               required
               size="small"
-              style={{ minWidth: "150px", minHeight: "10px" }}
+              className="Select"
               onChange={(event) => {
                 setProgramData((prevState) => ({
                   ...prevState,

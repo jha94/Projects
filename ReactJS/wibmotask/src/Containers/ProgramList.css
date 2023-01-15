@@ -14,3 +14,21 @@
     justify-content:space-evenly;
     background-color: antiquewhite;
 }
+
+.Button {
+    margin-right: 30px;
+    margin-top: 20px;
+}
+
+.NoProgram {
+    justify-content: flex-end;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.EditDelete{
+    width: 80px;
+    height: 35px;
+    margin-top: 6px;
+}

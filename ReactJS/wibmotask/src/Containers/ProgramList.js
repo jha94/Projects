@@ -21,14 +21,14 @@ function ProgramList(){
                  {otherIdDetails.name? <p>Other ID Name: {otherIdDetails.name}</p>:''}
                  {otherIdDetails.type?<p>Other ID Type: {otherIdDetails.type}</p>:''}
                  {uID?<p>Unique Identifier: {uID}</p>:''}
-                <button style={{width:'80px', height:'35px', marginTop:'6px'}} onClick={()=>{
+                <button className='EditDelete' onClick={()=>{
                   programList.splice(index, 1)
                   setProgramDetails(prevState => ({
                     ...prevState,
                     programList:programList
                  }));
                 }} >Delete</button>
-                <button style={{width:'80px', height:'35px', marginTop:'6px'}} onClick={()=>{
+                <button className='EditDelete' onClick={()=>{
                   setProgramDetails(prevState => ({
                     ...prevState,
                     showProgramList:false,
@@ -42,8 +42,8 @@ function ProgramList(){
     }
     return(
         <div>
-        <div style={{justifyContent: 'flex-end', alignItems:'center', display:'flex', flexDirection:'row'}}>
-        <Button variant="contained" style={{marginRight:'30px', marginTop:'20px' }} onClick={()=>{
+        <div className='NoProgram'>
+        <Button variant="contained" className='Button' onClick={()=>{
           setProgramDetails(prevState => ({
             ...prevState,
             showProgramList:false
@@ -51,11 +51,11 @@ function ProgramList(){
         }} >Create new Program</Button>
         </div>
 
-        <Button disabled={alignmentType==='row'} variant="contained" style={{marginRight:'30px', marginTop:'20px' }} onClick={()=>{
+        <Button disabled={alignmentType==='row'} variant="contained" className='Button' onClick={()=>{
             setAlignmentType('row')
         }} >Horizontal</Button>
 
-<Button variant="contained" disabled={alignmentType==='column'} style={{marginRight:'30px', marginTop:'20px' }} onClick={()=>{
+<Button variant="contained" disabled={alignmentType==='column'} className='Button' onClick={()=>{
             setAlignmentType('column')
         }} >Vertical</Button>
         {renderPrograms()}

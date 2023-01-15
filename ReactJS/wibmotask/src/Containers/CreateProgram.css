@@ -1,0 +1,10 @@
+
+.Select{
+    min-width: 150px;
+    min-height: 10px;
+}
+
+.FormControl {
+    display: flex;
+    flex-direction: row;
+}

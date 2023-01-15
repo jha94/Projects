@@ -4,7 +4,7 @@ const SignIn = lazy(()=>import('./Containers/SignIn'));
 const Home = lazy(()=>import('./Containers/Home'));
 
 function App(){
-  const [isLoggedIn, navigateToHomePage] = useState(true)
+  const [isLoggedIn, navigateToHomePage] = useState(false)
   
   return(
     <Suspense fallback={<p>loading..</p>}>
