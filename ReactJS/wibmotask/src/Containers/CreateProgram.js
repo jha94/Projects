@@ -20,6 +20,7 @@ export default function CreateProgram() {
       length:'',
     }
   })
+
     const handleSubmit = (event) => {
       const { programList, index } =  programDetails;
       const { selectedKYC } = programData;
@@ -38,16 +39,18 @@ export default function CreateProgram() {
           showProgramList: true,
           index:-1
         })
-          } }else{
-            index>-1?programList[index]=programData:programList.push(programData)
+      }
+    }else{
+      index>-1?programList[index]=programData:programList.push(programData)
         setProgramDetails({
           programList,
           showProgramList: true,
           index:-1
         })
-          }
+      }
       }
       };
+
       const {programName , selectedKYC, uID, minKYCType, otherIdDetails} = programData
       const handleKYCCheck = (event) => {
         var selectedKYC = [...programData.selectedKYC];
@@ -73,41 +76,44 @@ export default function CreateProgram() {
        }));
       };
       const { clientList, countryList, supportedKYCList, minimumKYCOptions, fullKYCSupportedDocs, uniqueidentifiers } = programCreationData;
-  return (
-    <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
-    <div style={{marginLeft:'50px'}} >
+
+  const renderProgramSpecifications = () =>{
+    return(
       <div>
-      Program Name:  <TextField
-          variant="standard"
-          required
-          name='name'
-          type='text'
-          value={programName}
-          onChange={({target:{value}})=>{
-            if(allLetter(value)){
-              setProgramData(prevState => ({
-                ...prevState,
-                programName:value
-             }));
-            }
-              }}
-        />
+      <div>
+      Program Name:
+      <TextField
+      variant="standard"
+      required
+      name='name'
+      type='text'
+      value={programName}
+      onChange={({target:{value}})=>{
+        if(allLetter(value)){
+          setProgramData(prevState => ({
+            ...prevState,
+            programName:value
+          }));
+        }
+      }}
+      />
       </div>
       <br/>
-        Program IFI:  <TextField
-          variant="standard"
-          contentEditable={false}
-          value='Gem bank, India'
+        Program IFI:
+        <TextField
+        variant="standard"
+        contentEditable={false}
+        value='Gem bank, India'
         />
       Client:
       <Select
       required
-          size='small'
-          style={{minWidth:'150px', minHeight:'10px'}}
-          onChange={({target:{value}})=>{
-            setProgramData(prevState => ({
-              ...prevState,
-              client:value
+      size='small'
+      style={{minWidth:'150px', minHeight:'10px'}}
+      onChange={({target:{value}})=>{
+        setProgramData(prevState => ({
+          ...prevState,
+          client:value
            }));
           }}
         >
@@ -117,8 +123,9 @@ export default function CreateProgram() {
         <br/>
         
 
-        Program Duration:  <TextField
-        required
+        Program Duration:
+        <TextField
+          required
           variant="standard"
           name='duration'
           InputProps={{
@@ -147,24 +154,24 @@ export default function CreateProgram() {
         >
           {countryList.map(({name, code})=><MenuItem value={code}>{name}</MenuItem>)}
         </Select>
-   
-    <br/>
+        <br/>
+        </div>
+    )
+  }
 
-   
-   <FormControl sx={{ m: 1, minWidth: 120 }} style={{ display:'flex', flexDirection:'row' }} error={selectedKYC.includes('false')}>
-   Support KYC:
+  const renderKYCDetails = () =>{
+    return(
+      <div>
+        <FormControl sx={{ m: 1, minWidth: 120 }} style={{ display:'flex', flexDirection:'row' }} error={selectedKYC.includes('false')}>
+          Support KYC:
    {supportedKYCList.map((value)=><FormControlLabel control={<Checkbox onChange={handleKYCCheck} value={value} />} label={value} />)}
    {selectedKYC.includes('false')?<FormHelperText>This Field is mandatory</FormHelperText>:''}
    </FormControl>
-        
         <br/>
         {(selectedKYC.length&&selectedKYC.includes('Min KYC'))?
            <FormControl sx={{ m: 1, minWidth: 120 }} style={{ display:'flex', flexDirection:'row' }} error={typeof minKYCType==='boolean'}>
-            {minimumKYCOptions.map((value)=>
-   <FormControlLabel control={<Checkbox checked={minKYCType===value} onChange={handleMinKYCType} value={value} />} label={value} />
-            )}
-   {typeof minKYCType==='boolean'?<FormHelperText>This Field is mandatory</FormHelperText>:''}
-
+            {minimumKYCOptions.map((value)=><FormControlLabel control={<Checkbox checked={minKYCType===value} onChange={handleMinKYCType} value={value} />} label={value} />)}
+            {typeof minKYCType==='boolean'?<FormHelperText>This Field is mandatory</FormHelperText>:''}
    </FormControl>
         :''}
         {(selectedKYC.length&&((selectedKYC.includes('Full KYC'))||selectedKYC.includes('Short Fall KYC')))?
@@ -183,33 +190,21 @@ export default function CreateProgram() {
       >
         {fullKYCSupportedDocs.map((value)=><MenuItem value={value}>{value}</MenuItem>)}
       </Select>
-   
-
       </FormControl>
         :''}
-           <FormControl sx={{ m: 1, minWidth: 120 }} style={{ display:'flex', flexDirection:'row' }}>
-Unique identifier :
-         <Select
-         required
-        size='small'
-        style={{minWidth:'150px', minHeight:'10px'}}
-        onChange={(event)=>{
-          setProgramData(prevState => ({
-            ...prevState,
-            uID:event.target.value
-         }));
-        }}
-      >
-        {uniqueidentifiers.map((value)=> <MenuItem value={value}>{value}</MenuItem>)}
-      </Select>
+      </div>
+    )
+  }
 
-      </FormControl>
-      {uID==='Others'?
+  const renderOtherUID = () =>{
+    return(
       <div>
+        <div>
         Define Others
-<br/>
-        ID Name:  <TextField
-        required
+        <br/>
+        ID Name:
+        <TextField
+          required
           variant="standard"
           type='text'
           value={otherIdDetails.name}
@@ -224,8 +219,8 @@ Unique identifier :
               }}
         />
         <br />
-
-ID Type:  <TextField
+        ID Type:
+        <TextField
           variant="standard"
           required
           value={otherIdDetails.type}
@@ -241,9 +236,10 @@ ID Type:  <TextField
               }}
             }
         />
-<br/>
-ID Length:  <TextField
-required
+        <br/>
+        ID Length:
+        <TextField
+          required
           variant="standard"
           InputProps={{
             inputProps: { min: 1 }
@@ -252,16 +248,39 @@ required
           value={otherIdDetails.length}
         />
       </div>
+      </div>
+    )
 
-      :''}
+  }
+
+  return (
+    <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+    <div style={{marginLeft:'50px'}} >
+    {renderProgramSpecifications()}
+    {renderKYCDetails()}
+    <FormControl sx={{ m: 1, minWidth: 120 }} style={{ display:'flex', flexDirection:'row' }}>
+      Unique identifier :
+         <Select
+         required
+        size='small'
+        style={{minWidth:'150px', minHeight:'10px'}}
+        onChange={(event)=>{
+          setProgramData(prevState => ({
+            ...prevState,
+            uID:event.target.value
+         }));
+        }}
+      >
+        {uniqueidentifiers.map((value)=> <MenuItem value={value}>{value}</MenuItem>)}
+      </Select>
+      </FormControl>
+      {uID==='Others'?renderOtherUID():''}
         <br/>
       <Button
-              type="submit"
-              variant="contained"
-            >
-              Create Program
-            </Button>
-      
+      type="submit"
+      variant="contained">
+        Create Program
+        </Button>
       </div>
       </Box>
   );
