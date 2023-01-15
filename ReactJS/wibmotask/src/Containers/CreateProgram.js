@@ -6,7 +6,7 @@ import {
   allLetter,
   alphaNumeric,
 } from "../Utils";
-import './CreateProgram.css'
+import '../Styles/CreateProgram.css'
 
 export default function CreateProgram() {
   const [programDetails, setProgramDetails] = useContext(programDetailsContext);

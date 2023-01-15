@@ -1,6 +1,6 @@
 import React, {lazy, Suspense, useContext} from 'react'
 import { programDetailsContext } from '../Utils'
-import './Home.css'
+import '../Styles/Home.css'
 const Header = lazy(()=>import('../Components/Header'))
 const Footer = lazy(()=>import('../Components/Footer'))
 const ProgramList = lazy(()=>import('./ProgramList'))

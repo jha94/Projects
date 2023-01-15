@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react'
 import Button from '@mui/material/Button';
 import { programDetailsContext } from '../Utils'
-import './ProgramList.css'
+import '../Styles/ProgramList.css'
 
 function ProgramList(){
   const [programDetails, setProgramDetails] = useContext(programDetailsContext);
