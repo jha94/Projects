@@ -22,23 +22,51 @@ export default function CreateProgram() {
   const [programDetails, setProgramDetails] = useContext(programDetailsContext);
   const { programList: createdProgram, index: createProgramIndex } =
     programDetails;
+
   const [programData, setProgramData] = useState({
     programName:
       (createdProgram.length &&
         createProgramIndex > -1 &&
         createdProgram[createProgramIndex].programName) ||
       "",
-    client: "",
-    duration: "",
-    country: "",
-    selectedKYC: [],
+    client: (createdProgram.length &&
+      createProgramIndex > -1 &&
+      createdProgram[createProgramIndex].client) ||
+    "",
+    duration: (createdProgram.length &&
+      createProgramIndex > -1 &&
+      createdProgram[createProgramIndex].duration) ||
+    "",
+    country: (createdProgram.length &&
+      createProgramIndex > -1 &&
+      createdProgram[createProgramIndex].country) ||
+    "",
+    selectedKYC: (createdProgram.length &&
+      createProgramIndex > -1 &&
+      createdProgram[createProgramIndex].selectedKYC) ||
+    [],
     minKYCType: "",
-    fullKYCReqDocs: "",
-    uID: "",
+    fullKYCReqDocs: (createdProgram.length &&
+      createProgramIndex > -1 &&
+      createdProgram[createProgramIndex].fullKYCReqDocs) ||
+    '',
+    uID: (createdProgram.length &&
+      createProgramIndex > -1 &&
+      createdProgram[createProgramIndex].uID) ||
+    '',
     otherIdDetails: {
-      name: "",
-      type: "",
-      length: "",
+      name: (createdProgram.length &&
+        createProgramIndex > -1 &&
+        createdProgram[createProgramIndex].otherIdDetails.name) ||
+      '',
+      type: (createdProgram.length &&
+        createProgramIndex > -1 &&
+        createdProgram[createProgramIndex].otherIdDetails.type) ||
+      '',
+      length: (createdProgram.length &&
+        createProgramIndex > -1 &&
+        createdProgram[createProgramIndex].otherIdDetails.length) ||
+      '',
     },
   });
 
@@ -79,7 +107,7 @@ export default function CreateProgram() {
     }
   };
 
-  const { programName, selectedKYC, uID, minKYCType, otherIdDetails, fullKYCReqDocs } =
+  const { programName, selectedKYC, uID, minKYCType, otherIdDetails, fullKYCReqDocs, country, client, duration } =
     programData;
   const handleKYCCheck = (event) => {
     var selectedKYC = [...programData.selectedKYC];
@@ -118,6 +146,7 @@ export default function CreateProgram() {
   } = programCreationData;
 
   const renderProgramSpecifications = () => {
+    console.log('client to select', client);
     return (
       <>
         <Grid container my={2}>
@@ -127,8 +156,8 @@ export default function CreateProgram() {
               variant="standard"
               required
               fullWidth
-              name="name"
               type="text"
+              
               value={programName}
               onChange={({ target: { value } }) => {
                 if (allLetter(value)) {
@@ -154,7 +183,10 @@ export default function CreateProgram() {
           <Grid xs={3}>
             <Select
               required
+              readOnly={createProgramIndex>-1}
               size="small"
+              value={client}
+              defaultValue={client}
               style={{ minWidth: "150px", minHeight: "10px" }}
               onChange={({ target: { value } }) => {
                 setProgramData((prevState) => ({
@@ -176,6 +208,7 @@ export default function CreateProgram() {
               required
               variant="standard"
               name="duration"
+              value={duration}
               InputProps={{
                 inputProps: { min: 1 },
               }}
@@ -192,7 +225,9 @@ export default function CreateProgram() {
           <Grid xs={3}>
             <Select
               required
+              readOnly={createProgramIndex>-1}
               size="small"
+              value={country}
               style={{ minWidth: "150px", minHeight: "10px" }}
               onChange={({ target: { value } }) => {
                 setProgramData((prevState) => ({
@@ -223,7 +258,7 @@ export default function CreateProgram() {
                 error={selectedKYC.includes("false")}
               >
                 <FormControlLabel
-                  control={<Checkbox onChange={handleKYCCheck} value={value} />}
+                  control={<Checkbox onChange={handleKYCCheck} value={value} checked={selectedKYC.includes(value)}/>}
                   label={value}
                 />
               </FormControl>
@@ -245,6 +280,7 @@ export default function CreateProgram() {
                   <Grid xs={6} ml={4}>
                     <Select
                       required
+                      value={fullKYCReqDocs}
                       onChange={({ target: { value } }) => {
                         setProgramData((prevState) => ({
                           ...prevState,
@@ -309,6 +345,7 @@ export default function CreateProgram() {
           <Grid xs={2}>
             <TextField
               required
+              
               variant="standard"
               type="text"
               value={otherIdDetails.name}
@@ -377,6 +414,7 @@ export default function CreateProgram() {
             style={{ display: "flex", flexDirection: "row" }}
           >
             <Select
+              value={uID}
               required
               size="small"
               style={{ minWidth: "150px", minHeight: "10px" }}

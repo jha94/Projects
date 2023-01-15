@@ -8,19 +8,19 @@ function ProgramList(){
     const { programList } =  programDetails;
     const renderprograms = () => {
       return  programList.length?
-      programList.map(({programName, country:{name:countryName}, duration, fullKYCReqDocs, client, otherIdDetails, uID }, index)=>{
+      programList.map(({programName, country:{name:countryName}, duration, selectedKYC, client, otherIdDetails, uID }, index)=>{
         console.log('Object.keys(otherIdDetails)', Object.values(otherIdDetails));
         return(
             <div style={{ display:'flex', flexDirection:alignmentType, paddingLeft:'15px', justifyContent:'space-evenly' }}>
                 <p>Program: {programName}</p>
                 <p>Country: {countryName}</p>
                 <p>Duration(In Month): {duration}</p>
-                <p>KYC Doc : {fullKYCReqDocs}</p>
+                <p>KYC Type :{selectedKYC.map(value=><p>{value}</p>)}</p>
                 <p>Client : {client.name}</p>
                
                  {otherIdDetails.name? <p>Other ID Name: {otherIdDetails.name}</p>:''}
                  {otherIdDetails.type?<p>Other ID Type: {otherIdDetails.type}</p>:''}
-                 <p>Unique Identifier: {uID}</p>
+                 {uID?<p>Unique Identifier: {uID}</p>:''}
                 <button style={{width:'80px', height:'35px', marginTop:'6px'}} onClick={()=>{
                   programList.splice(index, 1)
                   setProgramDetails(prevState => ({
