@@ -27,21 +27,26 @@ export default function CreateProgram() {
           setProgramData(prevState => ({
             ...prevState,
             selectedKYC: !selectedKYC.length?['false']:selectedKYC,
-            minKYCType:(selectedKYC.includes('Min KYC') && !minKYCType)?'false':minKYCType,
+            minKYCType:(selectedKYC.includes('Min KYC') && minKYCType==='')?false:minKYCType,
          }));
-
-         console.log('minKYCType', minKYCType);
-
+         if((selectedKYC.length && !selectedKYC.includes('false'))){
+          if(selectedKYC.includes('Min KYC')){
+            if(minKYCType){
          index>-1?programList[index]=programData:programList.push(programData)
-         console.log('selectedKYC.includes(',  (selectedKYC.includes('Min KYC') && minKYCType));
-      //   if((selectedKYC.length && !selectedKYC.includes('false'))){
-      //     console.log('text in if');
-      //   setProgramDetails({
-      //     programList,
-      //     showProgramList: true,
-      //     index:-1
-      //   })
-      // }
+        setProgramDetails({
+          programList,
+          showProgramList: true,
+          index:-1
+        })
+          } }else{
+            index>-1?programList[index]=programData:programList.push(programData)
+        setProgramDetails({
+          programList,
+          showProgramList: true,
+          index:-1
+        })
+          }
+      }
       };
       const {programName , selectedKYC, uID, minKYCType, otherIdDetails} = programData
       const handleKYCCheck = (event) => {
@@ -152,11 +157,11 @@ export default function CreateProgram() {
         
         <br/>
         {(selectedKYC.length&&selectedKYC.includes('Min KYC'))?
-           <FormControl sx={{ m: 1, minWidth: 120 }} style={{ display:'flex', flexDirection:'row' }} error={minKYCType==='false'}>
+           <FormControl sx={{ m: 1, minWidth: 120 }} style={{ display:'flex', flexDirection:'row' }} error={typeof minKYCType==='boolean'}>
             {minimumKYCOptions.map((value)=>
    <FormControlLabel control={<Checkbox checked={minKYCType===value} onChange={handleMinKYCType} value={value} />} label={value} />
             )}
-   {minKYCType==='false'?<FormHelperText>This Field is mandatory</FormHelperText>:''}
+   {typeof minKYCType==='boolean'?<FormHelperText>This Field is mandatory</FormHelperText>:''}
 
    </FormControl>
         :''}
