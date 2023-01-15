@@ -39,7 +39,7 @@ const programCreationData = Object.freeze({
   supportedKYCList: ['Full KYC', 'Min KYC','Short Fall KYC'],
   minimumKYCOptions:[ 'Cash Load', 'No Cash Load', 'Not Applicable'],
   fullKYCSupportedDocs: [ 'Aadhar Card', 'Pan Card', 'Voter ID'],
-  uniqueidentifiers: ['Pan Card', 'Mobile Number', 'Email ID', 'Others']
+  uniqueidentifiers: ['Mobile Number', 'Email ID', 'Others']
 })
 
 const alphaNumeric = (value)=> {
