@@ -11,12 +11,15 @@ const CreateProgram = lazy(()=>import('./CreateProgram'))
 function Home(){
     const [programDetails] = useContext(programDetailsContext);
     const {showProgramList} = programDetails;
-    console.log('programData', programDetails);
     return(
         <Suspense fallback={<p>Header loading...</p>}>
         <Header/>
-        {showProgramList?<ProgramList />:<CreateProgram/>}
-        <Footer/>
+        <div style={{minHeight:'80vh', display:'flex', flexDirection:'column'}}>
+            {showProgramList?<ProgramList />:<CreateProgram/>}
+        </div>
+        <div style={{marginTop:'auto'}}>
+            <Footer/>
+        </div>
         </Suspense>
         )
 }
