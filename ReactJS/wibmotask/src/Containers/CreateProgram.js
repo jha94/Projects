@@ -1,16 +1,5 @@
 import React, { useContext, useState } from "react";
-import {
-  TextField,
-  Button,
-  Box,
-  Select,
-  MenuItem,
-  FormControlLabel,
-  Checkbox,
-  FormHelperText,
-  FormControl,
-  Grid,
-} from "@mui/material";
+import { TextField, Button, Box, Select, MenuItem, FormControlLabel, Checkbox, FormHelperText, FormControl, Grid,} from "@mui/material";
 import {
   programDetailsContext,
   programCreationData,
@@ -20,53 +9,24 @@ import {
 
 export default function CreateProgram() {
   const [programDetails, setProgramDetails] = useContext(programDetailsContext);
-  const { programList: createdProgram, index: createProgramIndex } =
-    programDetails;
+  const { programList: createdProgram, index: createProgramIndex } = programDetails;
+  const programToBeEdited = createdProgram.length &&
+        createProgramIndex > -1 &&
+        createdProgram[createProgramIndex]
 
   const [programData, setProgramData] = useState({
-    programName:
-      (createdProgram.length &&
-        createProgramIndex > -1 &&
-        createdProgram[createProgramIndex].programName) ||
-      "",
-    client: (createdProgram.length &&
-      createProgramIndex > -1 &&
-      createdProgram[createProgramIndex].client) ||
-    "",
-    duration: (createdProgram.length &&
-      createProgramIndex > -1 &&
-      createdProgram[createProgramIndex].duration) ||
-    "",
-    country: (createdProgram.length &&
-      createProgramIndex > -1 &&
-      createdProgram[createProgramIndex].country) ||
-    "",
-    selectedKYC: (createdProgram.length &&
-      createProgramIndex > -1 &&
-      createdProgram[createProgramIndex].selectedKYC) ||
-    [],
-    minKYCType: "",
-    fullKYCReqDocs: (createdProgram.length &&
-      createProgramIndex > -1 &&
-      createdProgram[createProgramIndex].fullKYCReqDocs) ||
-    '',
-    uID: (createdProgram.length &&
-      createProgramIndex > -1 &&
-      createdProgram[createProgramIndex].uID) ||
-    '',
+    programName: (programToBeEdited.programName) || '',
+    client: (programToBeEdited.client) || '',
+    duration: (programToBeEdited.duration) || '',
+    country: (programToBeEdited.country) || '',
+    selectedKYC: (programToBeEdited.selectedKYC) || [],
+    minKYCType: (programToBeEdited.minKYCType) || '',
+    fullKYCReqDocs: (programToBeEdited.fullKYCReqDocs) || '',
+    uID: (programToBeEdited.uID) || '',
     otherIdDetails: {
-      name: (createdProgram.length &&
-        createProgramIndex > -1 &&
-        createdProgram[createProgramIndex].otherIdDetails.name) ||
-      '',
-      type: (createdProgram.length &&
-        createProgramIndex > -1 &&
-        createdProgram[createProgramIndex].otherIdDetails.type) ||
-      '',
-      length: (createdProgram.length &&
-        createProgramIndex > -1 &&
-        createdProgram[createProgramIndex].otherIdDetails.length) ||
-      '',
+      name: (programToBeEdited.otherIdDetails && programToBeEdited.otherIdDetails.name) || '',
+      type: (programToBeEdited.otherIdDetails && programToBeEdited.otherIdDetails.type) || '',
+      length: (programToBeEdited.otherIdDetails && programToBeEdited.otherIdDetails.length) || '',
     },
   });
 
@@ -107,8 +67,8 @@ export default function CreateProgram() {
     }
   };
 
-  const { programName, selectedKYC, uID, minKYCType, otherIdDetails, fullKYCReqDocs, country, client, duration } =
-    programData;
+  const { programName, selectedKYC, uID, minKYCType, otherIdDetails, fullKYCReqDocs, country, client, duration } = programData;
+
   const handleKYCCheck = (event) => {
     var selectedKYC = [...programData.selectedKYC];
     if (event.target.checked) {
@@ -146,7 +106,6 @@ export default function CreateProgram() {
   } = programCreationData;
 
   const renderProgramSpecifications = () => {
-    console.log('client to select', client);
     return (
       <>
         <Grid container my={2}>
@@ -157,7 +116,6 @@ export default function CreateProgram() {
               required
               fullWidth
               type="text"
-              
               value={programName}
               onChange={({ target: { value } }) => {
                 if (allLetter(value)) {

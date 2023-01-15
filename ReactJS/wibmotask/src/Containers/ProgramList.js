@@ -1,15 +1,15 @@
 import React, {useContext, useState} from 'react'
 import Button from '@mui/material/Button';
 import { programDetailsContext } from '../Utils'
+import './ProgramList.css'
 
 function ProgramList(){
   const [programDetails, setProgramDetails] = useContext(programDetailsContext);
     const [alignmentType, setAlignmentType] = useState('row')
     const { programList } =  programDetails;
-    const renderprograms = () => {
+    const renderPrograms = () => {
       return  programList.length?
       programList.map(({programName, country:{name:countryName}, duration, selectedKYC, client, otherIdDetails, uID }, index)=>{
-        console.log('Object.keys(otherIdDetails)', Object.values(otherIdDetails));
         return(
             <div style={{ display:'flex', flexDirection:alignmentType, paddingLeft:'15px', justifyContent:'space-evenly' }}>
                 <p>Program: {programName}</p>
@@ -58,7 +58,7 @@ function ProgramList(){
 <Button variant="contained" disabled={alignmentType==='column'} style={{marginRight:'30px', marginTop:'20px' }} onClick={()=>{
             setAlignmentType('column')
         }} >Vertical</Button>
-        {renderprograms()}
+        {renderPrograms()}
         </div>
         )
 }

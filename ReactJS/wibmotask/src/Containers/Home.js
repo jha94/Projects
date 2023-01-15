@@ -1,6 +1,5 @@
 import React, {lazy, Suspense, useContext} from 'react'
 import { programDetailsContext } from '../Utils'
-import '../App.css'
 const Header = lazy(()=>import('../Components/Header'))
 const Footer = lazy(()=>import('../Components/Footer'))
 const ProgramList = lazy(()=>import('./ProgramList'))
@@ -12,7 +11,7 @@ function Home(){
     const [programDetails] = useContext(programDetailsContext);
     const {showProgramList} = programDetails;
     return(
-        <Suspense fallback={<p>Header loading...</p>}>
+        <Suspense fallback={<p>loading...</p>}>
         <Header/>
         <div style={{minHeight:'80vh', display:'flex', flexDirection:'column'}}>
             {showProgramList?<ProgramList />:<CreateProgram/>}

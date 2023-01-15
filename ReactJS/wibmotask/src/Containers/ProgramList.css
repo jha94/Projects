@@ -1,0 +1,16 @@
+
+.HorizontalList {
+    display: 'flex';
+    flex-direction: row;
+    padding-left: 15px;
+    justify-content:space-evenly;
+    background-color: aquamarine;
+}
+
+.VerticalList {
+    display: 'flex';
+    flex-direction: column;
+    padding-left: 15px;
+    justify-content:space-evenly;
+    background-color: antiquewhite;
+}
