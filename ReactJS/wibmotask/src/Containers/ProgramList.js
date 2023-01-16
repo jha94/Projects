@@ -5,13 +5,13 @@ import '../Styles/ProgramList.css'
 
 function ProgramList(){
   const [programDetails, setProgramDetails] = useContext(programDetailsContext);
-    const [alignmentType, setAlignmentType] = useState('row')
+    const [horizontalAlignment, setHorizontalAlignment] = useState(true)
     const { programList } =  programDetails;
     const renderPrograms = () => {
       return  programList.length?
       programList.map(({programName, country:{name:countryName}, duration, selectedKYC, client, otherIdDetails, uID }, index)=>{
         return(
-            <div style={{ display:'flex', flexDirection:alignmentType, paddingLeft:'15px', justifyContent:'space-evenly' }}>
+            <div className={horizontalAlignment?'HorizontalList':'VerticalList'} >
                 <p>Program: {programName}</p>
                 <p>Country: {countryName}</p>
                 <p>Duration(In Month): {duration}</p>
@@ -51,12 +51,12 @@ function ProgramList(){
         }} >Create new Program</Button>
         </div>
 
-        <Button disabled={alignmentType==='row'} variant="contained" className='Button' onClick={()=>{
-            setAlignmentType('row')
+        <Button disabled={horizontalAlignment} variant="contained" className='Button' onClick={()=>{
+            setHorizontalAlignment(true)
         }} >Horizontal</Button>
 
-<Button variant="contained" disabled={alignmentType==='column'} className='Button' onClick={()=>{
-            setAlignmentType('column')
+<Button variant="contained" disabled={!horizontalAlignment} className='Button' onClick={()=>{
+            setHorizontalAlignment(false)
         }} >Vertical</Button>
         {renderPrograms()}
         </div>

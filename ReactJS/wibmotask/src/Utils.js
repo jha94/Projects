@@ -23,6 +23,7 @@ const validationData = Object.freeze({
     validPasswords: ['9080764512', 'SE2312'],
     UserIDWarningMsg:'Please enter user ID',
     wrongPasswordWarningMsg: 'Please enter valid password',
+    mandatoryField: 'This Field is mandatory'
 })
 
 const programCreationData = Object.freeze({

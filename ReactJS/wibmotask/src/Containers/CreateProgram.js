@@ -5,6 +5,7 @@ import {
   programCreationData,
   allLetter,
   alphaNumeric,
+  validationData,
 } from "../Utils";
 import '../Styles/CreateProgram.css'
 
@@ -224,7 +225,7 @@ export default function CreateProgram() {
             </Grid>
           ))}
           {selectedKYC.includes("false") ? (
-            <FormHelperText>This Field is mandatory</FormHelperText>
+            <FormHelperText>{validationData.mandatoryField}</FormHelperText>
           ) : (
             ""
           )}
@@ -279,7 +280,7 @@ export default function CreateProgram() {
                   />
                 ))}
                 {typeof minKYCType === "boolean" ? (
-                  <FormHelperText>This Field is mandatory</FormHelperText>
+                  <FormHelperText>{validationData.mandatoryField}</FormHelperText>
                 ) : (
                   ""
                 )}
