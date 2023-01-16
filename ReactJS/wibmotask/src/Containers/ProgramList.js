@@ -7,7 +7,7 @@ function ProgramList(){
   const [programDetails, setProgramDetails] = useContext(programDetailsContext);
     const [horizontalAlignment, setHorizontalAlignment] = useState(true)
     const { programList } =  programDetails;
-    
+
     const renderPrograms = () => {
       return  programList.length?
       programList.map(({programName, country:{name:countryName}, duration, selectedKYC, client, otherIdDetails, uID }, index)=>{
@@ -58,7 +58,7 @@ function ProgramList(){
 
 
     return(
-        <div>
+        <>
         <div className='NoProgram'>
         <Button variant="contained" className='Button' onClick={()=>{
           setProgramDetails(prevState => ({
@@ -69,7 +69,7 @@ function ProgramList(){
         </div>
         {programList.length?renderAlignmentButton():''}
         {renderPrograms()}
-        </div>
+        </>
         )
 }
 
