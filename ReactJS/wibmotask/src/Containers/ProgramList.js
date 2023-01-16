@@ -7,6 +7,7 @@ function ProgramList(){
   const [programDetails, setProgramDetails] = useContext(programDetailsContext);
     const [horizontalAlignment, setHorizontalAlignment] = useState(true)
     const { programList } =  programDetails;
+    
     const renderPrograms = () => {
       return  programList.length?
       programList.map(({programName, country:{name:countryName}, duration, selectedKYC, client, otherIdDetails, uID }, index)=>{
@@ -40,6 +41,22 @@ function ProgramList(){
       })
       :<h2 style={{marginLeft:'40%' }} >No program available</h2>
     }
+
+    const renderAlignmentButton = () =>{
+      return(
+        <div>
+           <Button disabled={horizontalAlignment} variant="contained" className='Button' onClick={()=>{
+            setHorizontalAlignment(true)
+        }} >Horizontal</Button>
+
+<Button variant="contained" disabled={!horizontalAlignment} className='Button' onClick={()=>{
+            setHorizontalAlignment(false)
+        }} >Vertical</Button>
+        </div>
+      )
+    }
+
+
     return(
         <div>
         <div className='NoProgram'>
@@ -50,14 +67,7 @@ function ProgramList(){
          }));
         }} >Create new Program</Button>
         </div>
-
-        <Button disabled={horizontalAlignment} variant="contained" className='Button' onClick={()=>{
-            setHorizontalAlignment(true)
-        }} >Horizontal</Button>
-
-<Button variant="contained" disabled={!horizontalAlignment} className='Button' onClick={()=>{
-            setHorizontalAlignment(false)
-        }} >Vertical</Button>
+        {programList.length?renderAlignmentButton():''}
         {renderPrograms()}
         </div>
         )

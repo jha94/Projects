@@ -25,7 +25,7 @@ export default function Footer() {
       >
         <Container maxWidth="sm">
           <Typography variant="body1">
-            My sticky footer can be found here.
+           Copyright @ Wibmo
           </Typography>
         </Container>
       </Box>
