@@ -1,0 +1,120 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main{
+    min-height: 100vh;
+    /* background-color:  #65dfc6; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right top, #65dfc6, #6cdbeb);
+}
+
+.glass{
+    background: white;
+    min-height: 80vh;
+    min-width: 100vh;
+    background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
+    border-radius: 2rem;
+    z-index: 2;
+    backdrop-filter: blur(2rem);
+    display: flex;
+    flex-direction: row;
+    /* background-color: blue; */
+}
+
+.circle1, .circle2{
+    background: white;
+    background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.3));
+    height: 20rem;
+    width: 20rem;
+    position: absolute;
+    border-radius: 50%;
+}
+
+.circle1{
+    top:5%;
+    right: 15%;
+}
+
+.circle2{
+    bottom: 5%;
+    left: 10%;
+}
+
+.user{
+    margin: 50px;
+    margin-bottom: 3rem;
+    margin-top: 20px;
+}
+
+.link{
+    display: flex;
+    flex-direction: row;
+    margin-left: 50px;
+    margin-bottom: 25px;
+}
+
+.linkImg{
+    height: 35px;
+    width: 35px;
+    margin-right: 20px;
+}
+
+.pro{
+    display: flex;
+    flex-direction: row;
+    height: 100px;
+    background: linear-gradient(to right top, #65dfc6, #6cdbeb);
+    width: 14rem;
+    flex-wrap: wrap;
+    justify-content:space-around;
+    align-items: center;
+    border-radius: 10px;
+    /* margin-top: 50px; */
+    margin-left: 10px;
+    margin-right: 20px;
+}
+
+.proGames{
+    height: 5rem;
+    /* width: 5rem; */
+}
+
+.gameText{
+    width: 5rem;
+    color: white;
+}
+
+.status{
+    margin: 20px;
+}
+
+.linkText{
+    margin-top: 7px;
+}
+
+.card{
+    display: flex;
+    flex-direction: row;
+    background-color: rgba(255, 255, 255, 0.819);
+    width: 100%;
+    margin: 1rem;
+    border-radius: 8px;
+    box-shadow: 3px;
+    height: 5rem;
+    padding: 1rem;
+}
+
+.gameImg{
+    margin-right: 2rem;
+}
+
+.percentage{
+    margin-left: 2rem;
+    margin-top: 10px;
+}
