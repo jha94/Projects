@@ -5,6 +5,5 @@ function BusinessMan(){
     return(
         <p> {test.fName+' '+test.lName}</p>     
     )
-
 }
 export default BusinessMan;

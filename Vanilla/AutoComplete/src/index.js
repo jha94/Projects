@@ -14,7 +14,6 @@ const renderDropDownItems = (list = []) =>{
     list.forEach(item=>{
         const el = document.createElement('div');
         el.innerHTML = item;
-        el.classList.add('dropdown-item');
         el.setAttribute('data-key', item)
         suggFragment.appendChild(el)
     })
@@ -45,8 +44,6 @@ const handleSelect = (event) =>{
         inputBox.value = key;
         resetState()
     }
-
-
 }
 
 (()=>{
