@@ -1,0 +1,10 @@
+.grid-container{
+    display: grid;
+    /* grid-template-columns: 200px 300px; */
+    grid-template-rows: repeat(3, 100px);
+    grid-gap: 10px;
+}
+
+.grid-item{
+    background-color: aquamarine;
+}

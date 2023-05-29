@@ -1,4 +1,4 @@
-const form = document.getElementById('addTodo');
+
 const input = document.getElementById('input');
 const list = document.getElementById('todoList');
 const addTaskBtn = document.getElementById('addTaskBtn');
@@ -34,7 +34,7 @@ function addTasks(){
 
 function renderToDoList(ind=-1, type=''){
     list.innerHTML = '';
-   const unorderedList = document.createElement('ul');
+   const unorderedList = document.createElement('span');
    for(let index=0;index<todoList.length;index++){
 
     const listItem = document.createElement('li');
@@ -86,3 +86,5 @@ function todoListOps(type, index){
     }
 
 }
+
+
