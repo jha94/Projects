@@ -1,0 +1,13 @@
+#span{
+    padding:'10px';
+    width:'100%';
+    text-align: center;
+}
+
+#div{
+    width:'100%';
+    background-color:'green';
+    display:'flex';
+    justify-content:'space-around';
+    align-items:'space-around',
+}

@@ -5,7 +5,7 @@ and mark the task as done or undone.
 
 Task will persist till the session even if we'll refresh the browser
 
-To Run the application and check it out it's feature please follow below steps :-
+To Run the application and check out it's feature please follow below steps :-
 
 git clone 
 save it in my laptop

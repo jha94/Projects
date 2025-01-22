@@ -1,0 +1,40 @@
+
+  .content {
+    width: 100px;
+    position: relative;
+    overflow: hidden;
+    height: 130px;
+    margin-bottom: 10px;
+  }
+  .content li {
+    font-size: 100px;
+    width: 100%;
+    list-style: none;
+    position: absolute;
+    top: 200px;
+  }
+  .content li.current {
+    top: 30px;
+    background-color: aqua;
+  }
+
+  .previous, .next{
+    display: none;
+  }
+
+  .previousVisible, .nextVisible{
+    display: block;
+  }
+
+  body{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  #btnGrp{
+    display: flex;
+    flex-direction: row;
+  }

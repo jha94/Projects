@@ -45,8 +45,6 @@ const handleSelect = (event) =>{
         inputBox.value = key;
         resetState()
     }
-
-
 }
 
 (()=>{

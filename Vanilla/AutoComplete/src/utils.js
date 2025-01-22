@@ -16,6 +16,7 @@ export const debounce = (fn, delay=500) =>{
         const args = arguments;
         clearTimeout(timerCtx)
         timerCtx = setTimeout(()=>{
+            console.log('hello')
             fn.apply(self, args)
         }, delay)
     }

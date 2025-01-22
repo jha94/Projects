@@ -1,0 +1,29 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+#board{
+    height: 720px;
+    width: 720px;
+    background-color: #fff;
+    border: 1px solid black;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#evenBox, #oddBox{
+    height: 90px;
+    width: 90px;
+    /* border: 1px solid black; */
+    box-sizing: border-box;
+}
+
+#evenBox:nth-of-type(2n){
+    background-color: black;
+}
+
+#oddBox:nth-of-type(2n+1){
+    background-color: black;
+}

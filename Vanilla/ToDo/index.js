@@ -1,90 +1,70 @@
 
-const input = document.getElementById('input');
-const list = document.getElementById('todoList');
-const addTaskBtn = document.getElementById('addTaskBtn');
-
-const todoList = JSON.parse(sessionStorage.getItem('todoList'))||[];
+const todoInput = document.getElementById('todoInput');
+const addTodoBtn = document.getElementById('addTodoBtn');
+const todoListWrapper = document.getElementById('todoListContainer');
+const todoList = JSON.parse(sessionStorage.getItem('todoList'))|| [];
+const completedTodo = JSON.parse(sessionStorage.getItem('completedTodo'))|| [];
 
 window.addEventListener('load', ()=>{
-    renderToDoList();
+    renderTodoList()
+    addTodoBtn.disabled = true;
 })
 
-input.addEventListener('input', ()=>{
-    document.getElementById('addTaskBtn').disabled = !input.value;
+todoInput.addEventListener('input', ()=>{
+    addTodoBtn.disabled = !todoInput.value
 })
 
-addTaskBtn.addEventListener('click', ()=>{
-    addTasks()
+addTodoBtn.addEventListener('click', ()=>{
+    todoList.push(todoInput.value);
+    sessionStorage.setItem('todoList',JSON.stringify(todoList))
+    todoInput.value='';
+    renderTodoList();
+    addTodoBtn.disabled=false;
 })
 
-input.addEventListener('keydown', (event)=>{
-    if(event.key==='Enter'){
-        event.preventDefault();
-        addTasks()
-    }
-})
-
-function addTasks(){
-    todoList.push(input.value);
-    sessionStorage.setItem('todoList', JSON.stringify(todoList))
-    input.value='';
-    renderToDoList();
-    document.getElementById('addTaskBtn').disabled=true
+function createButton(text, index){
+    const btn = document.createElement('button');
+    btn.textContent=text;
+    btn.addEventListener('click', ()=>{
+       todoOps(text, index);
+       renderTodoList();
+    })
+    return btn
 }
 
-function renderToDoList(ind=-1, type=''){
-    list.innerHTML = '';
-   const unorderedList = document.createElement('span');
-   for(let index=0;index<todoList.length;index++){
-
-    const listItem = document.createElement('li');
-    listItem.innerHTML = (index===ind && type==='Done')? '<s>'+todoList[index]+'</s>':todoList[index];
-    unorderedList.appendChild(listItem);
-
-    const doneBtn = document.createElement('button');
-    doneBtn.innerHTML = (index===ind && type==='Done')?'Undone':'Done';
-    doneBtn.addEventListener('click', ()=>{
-        todoListOps((index===ind && type==='Done')?'Undone':'Done', index)
-    })
-    unorderedList.appendChild(doneBtn);
-
-    const deleteBtn = document.createElement('button');
-    deleteBtn.textContent = 'Delete';
-    deleteBtn.addEventListener('click', ()=>{
-        todoListOps('delete', index)
-    })
-    unorderedList.appendChild(deleteBtn);
-
-    const editBtn = document.createElement('button');
-    editBtn.textContent = 'Edit';
-    editBtn.addEventListener('click', ()=>{
-        todoListOps('edit', index)
-    })
-    unorderedList.appendChild(editBtn);
-   }
-   list.appendChild(unorderedList);
-}
-
-function todoListOps(type, index){
-    switch(type){
+function todoOps(text, index){
+    switch(text){
+        case 'Delete':
+            todoList.splice(index, 1);
+            sessionStorage.setItem('todoList',JSON.stringify(todoList))
+            break;
+        case 'Edit':
+            todoInput.value=todoList.splice(index, 1);
+            addTodoBtn.disabled=false;
+            completedTodo.splice(index,1);
+            sessionStorage.setItem('completedTodo', JSON.stringify(completedTodo))
+            break;
         case 'Done':
-            renderToDoList(index, type);
+            completedTodo.push(index);
+            sessionStorage.setItem('completedTodo', JSON.stringify(completedTodo))
             break;
-        case 'Undone':
-            renderToDoList(index, type);
-            break;
-        case 'delete':
-            todoList.splice(index,1);
-            renderToDoList();
-            break
-        case 'edit':
-            input.value = todoList[index];
-            document.getElementById('addTaskBtn').disabled=false;
-            todoList.splice(index,1);
-            renderToDoList();
+        default:
+            completedTodo.splice(index,1);
+            sessionStorage.setItem('completedTodo', JSON.stringify(completedTodo))
             break;
     }
-
 }
 
-
+function renderTodoList(){
+    todoListWrapper.innerHTML='';
+    const listWrapper = document.createElement('span');
+    for(let index=0;index<todoList.length;index++){
+       const todo = document.createElement('p');
+       todo.innerHTML = completedTodo.includes(index)?'<s>'+todoList[index]+'</s>': todoList[index];
+       listWrapper.appendChild(todo);
+       listWrapper.appendChild(createButton('Delete', index));
+       listWrapper.appendChild(createButton('Edit', index));
+       listWrapper.appendChild(createButton(completedTodo.includes(index)?'Undone':'Done', index));
+    }
+    todoListWrapper.appendChild(listWrapper)
+}

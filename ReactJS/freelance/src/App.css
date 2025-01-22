@@ -1,0 +1,36 @@
+.App {
+  text-align: center;
+}
+
+.App input{
+  height: 30px;
+  width: 300px;
+  margin-top: 20px;
+  border-radius: 5px;
+  border-width: 1px;
+  padding-left: 5px;
+  font-size: medium;
+}
+
+.App input[type="radio"]{
+  width: 50px;
+  margin-right: 0px;
+  margin-top: 0px;
+}
+
+.App button{
+  height: 40px;
+  width: 150px;
+  margin: 20px;
+  border-width: 1px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.RadioBtnWrapper{
+  display:'flex';
+  justify-content:'center';
+  align-items:'center';
+  width:'70%';
+  margin-top: 20px;
+}
